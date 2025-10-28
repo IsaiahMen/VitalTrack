@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>VitalTrack — Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav container">
+      <div class="brand">VitalTrack <span class="badge">Auth</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="workouts.html">Workouts</a>
+        <a href="meals.html">Meals</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="card">
+      <h2>Create Account</h2>
+      <form id="registerForm" autocomplete="off">
+        <div class="form-row">
+          <div>
+            <label>Email</label>
+            <input name="email" type="email" required placeholder="you@school.edu" />
+          </div>
+          <div>
+            <label>Password</label>
+            <input name="password" type="password" required minlength="6" placeholder="at least 6 chars" />
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Login</h2>
+      <form id="loginForm" autocomplete="off">
+        <div class="form-row">
+          <div>
+            <label>Email</label>
+            <input name="email" type="email" required />
+          </div>
+          <div>
+            <label>Password</label>
+            <input name="password" type="password" required />
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-ghost" id="logoutBtn" type="button">Logout</button>
+      </form>
+
+      <h3>Session</h3>
+      <pre id="me" style="white-space:pre-wrap;background:var(--panel);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.06)"></pre>
+    </section>
+  </main>
+
+  <footer class="container"><span>© VitalTrack</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>

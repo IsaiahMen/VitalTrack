@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>VitalTrack — Meals</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav container">
+      <div class="brand">VitalTrack <span class="badge">Meals</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="workouts.html">Workouts</a>
+        <a href="meals.html">Meals</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="card">
+      <h2>Add / Edit Meal</h2>
+      <form id="mealForm">
+        <div class="form-row">
+          <div>
+            <label>Date</label>
+            <input name="date" type="date" required />
+          </div>
+          <div>
+            <label>Food</label>
+            <input name="food" placeholder="Grilled chicken bowl" required />
+          </div>
+          <div><label>Calories</label><input name="calories" type="number" placeholder="520" /></div>
+          <div><label>Protein (g)</label><input name="protein" type="number" step="0.1" placeholder="45" /></div>
+          <div><label>Carbs (g)</label><input name="carbs" type="number" step="0.1" placeholder="65" /></div>
+          <div><label>Fat (g)</label><input name="fat" type="number" step="0.1" placeholder="12" /></div>
+          <div style="grid-column:1/-1">
+            <label>Notes (optional)</label>
+            <textarea name="notes" placeholder="No dressing, extra veggies…"></textarea>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save Meal</button>
+      </form>
+      <div id="mealEditHint" class="hint">Editing meal… click “Save” to confirm.</div>
+    </section>
+
+    <section class="card">
+      <h2>Meals & Calories</h2>
+      <ul id="mealList" class="list"></ul>
+      <h3>Calorie Progress</h3>
+      <canvas id="mealChart" width="400" height="200"></canvas>
+    </section>
+  </main>
+
+  <footer class="container"><span>© VitalTrack</span></footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>VitalTrack — Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav container">
+      <div class="brand">VitalTrack <span class="badge">v1</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="workouts.html">Workouts</a>
+        <a href="meals.html">Meals</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Your fitness & nutrition, organized.</h1>
+      <p>Log workouts, track meals, and watch your progress in clear visuals.</p>
+      <div style="display:flex; gap:10px; justify-content:center">
+        <a class="btn btn-primary" href="login.html">Get Started</a>
+        <a class="btn btn-ghost" href="workouts.html">See Workouts</a>
+      </div>
+    </section>
+
+    <div class="main-grid" style="margin-top:24px">
+      <div class="card">
+        <h2>Why VitalTrack?</h2>
+        <p class="item-meta">Fast, private, and simple. Your data stays in your account.</p>
+        <ul class="list" style="margin-top:12px">
+          <li><span class="item-meta">✅ Secure login with hashed passwords</span></li>
+          <li><span class="item-meta">✅ Full CRUD for workouts & meals</span></li>
+          <li><span class="item-meta">✅ Charts to visualize progress</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>How it works</h2>
+        <p class="item-meta">Create an account, log entries, and track trends over time.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="container"><span>© VitalTrack</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>

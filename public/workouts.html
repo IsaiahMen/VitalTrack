@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>VitalTrack — Workouts</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav container">
+      <div class="brand">VitalTrack <span class="badge">Workouts</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="workouts.html">Workouts</a>
+        <a href="meals.html">Meals</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="card">
+      <h2>Add / Edit Workout</h2>
+      <form id="workoutForm">
+        <div class="form-row">
+          <div>
+            <label>Date</label>
+            <input name="date" type="date" required />
+          </div>
+          <div>
+            <label>Exercise</label>
+            <input name="exercise" placeholder="Bench press" required />
+          </div>
+          <div>
+            <label>Weight (optional)</label>
+            <input name="weight" type="number" step="0.1" placeholder="lbs/kg" />
+          </div>
+          <div>
+            <label>Reps (optional)</label>
+            <input name="reps" type="number" placeholder="8" />
+          </div>
+          <div style="grid-column:1/-1">
+            <label>Notes (optional)</label>
+            <textarea name="notes" placeholder="Tempo, RPE, sets…"></textarea>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Save Workout</button>
+      </form>
+      <div id="workoutEditHint" class="hint">Editing workout… click “Save” to confirm.</div>
+    </section>
+
+    <section class="card">
+      <h2>Recent Workouts</h2>
+      <ul id="workoutList" class="list"></ul>
+    </section>
+  </main>
+
+  <footer class="container"><span>© VitalTrack</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
