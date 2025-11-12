@@ -1,6 +1,6 @@
-// ------------------------
+// ----------------------
 // VitalTrack Server.js
-// ------------------------
+// ----------------------
 
 import dotenv from 'dotenv/config';
 import express from 'express';
@@ -15,35 +15,40 @@ import authRoutes from './auth.js';
 import workoutRoutes from './workouts.js';
 import mealRoutes from './meals.js';
 
-// ------------------------
-// App Setup
-// ------------------------
+// ----------------------
+// Setup
+// ----------------------
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+const isProd = process.env.NODE_ENV === 'production';
 
+app.set('trust proxy', 1); // Needed for HTTPS & sessions on Render
 app.use(express.json());
 
-// ------------------------
-// Security Middleware
-// ------------------------
-app.set('trust proxy', 1);
-
-// Helmet helps secure HTTP headers
+// Helmet for security headers
 app.use(
   helmet({
-    contentSecurityPolicy: false, // disable CSP for now; can fine-tune later
+    contentSecurityPolicy: false,
   })
 );
 
-// CORS configuration — allows local dev & later Netlify
+// ----------------------
+// CORS (Render only)
+// ----------------------
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://YOUR-NETLIFY-SITE.netlify.app'],
+    origin: [
+      'https://vitaltrack.onrender.com', // Render live backend
+      'https://vitaltrack.app',          // Your custom domain
+      'https://www.vitaltrack.app'       // Optional www
+    ],
     credentials: true,
   })
 );
 
-// Session configuration
+// ----------------------
+// Sessions
+// ----------------------
 app.use(
   session({
     secret: process.env.SESSION_SECRET || 'dev_secret',
@@ -51,35 +56,44 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      sameSite: 'lax',
-      secure: false, // change to true when deploying with HTTPS
+      sameSite: isProd ? 'none' : 'lax',
+      secure: isProd, // true on Render (HTTPS)
     },
   })
 );
 
-// Rate limiting for authentication routes
+// ----------------------
+// Rate Limiter
+// ----------------------
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per window
+  windowMs: 15 * 60 * 1000,
+  max: 100,
 });
 app.use('/api/auth', authLimiter);
 
-// ------------------------
+// ----------------------
+// Health Check (for Render)
+// ----------------------
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ ok: true });
+});
+
+// ----------------------
 // API Routes
-// ------------------------
+// ----------------------
 app.use('/api/auth', authRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/meals', mealRoutes);
 
-// ------------------------
-// Static Files (Frontend)
-// ------------------------
+// ----------------------
+// Serve Frontend (Static Files)
+// ----------------------
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// ------------------------
+// ----------------------
 // Start Server
-// ------------------------
+// ----------------------
 const port = process.env.PORT || 3000;
-app.listen(port, () =>
-  console.log(`✅ VitalTrack running on http://localhost:${port}`)
-);
+app.listen(port, () => {
+  console.log(`✅ VitalTrack running on port ${port}`);
+});
